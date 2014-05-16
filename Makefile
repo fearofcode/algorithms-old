@@ -1,13 +1,16 @@
 CC = clang
 
-FILES = main.c
-
-FLAGS =  -Wall -g -o quickfind -D_GNU_SOURCE
+FLAGS =  -Wall -D_GNU_SOURCE -O3
 
 LIBS = -lc
 
-all: 
-	$(CC) $(FILES) $(LIBS) $(FLAGS)
+all: quickfind quickunion
+
+quickfind:
+	$(CC) quickfind.c -o quickfind.out $(LIBS) $(FLAGS)
+
+quickunion:
+	$(CC) quickunion.c -o quickunion.out $(LIBS) $(FLAGS)
 
 clean: 
-	rm -f prog *.o
+	rm -f *.out *.o

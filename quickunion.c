@@ -4,6 +4,16 @@
 
 #define N 10
 
+int id[N];
+
+int root(int i) {
+  while(id[i] != i) {
+    i = id[i];
+  }
+
+  return i;
+}
+
 int main(int argc, char **argv) {
   const char* INPUT_FILE = "resources/input.txt";
 
@@ -11,9 +21,6 @@ int main(int argc, char **argv) {
   char *line = NULL;
   char *token;
   size_t len = 0;
-  ssize_t read;
-
-  int id[N];
 
   for(int i = 0; i < N; i++) {
     id[i] = i;
@@ -25,7 +32,7 @@ int main(int argc, char **argv) {
     exit(EXIT_FAILURE);
   }
 
-  while ((read = getline(&line, &len, fp)) != -1) {
+  while (getline(&line, &len, fp) != -1) {
     token = strtok(line, " ");
 
     int p = atoi(token);
@@ -36,18 +43,15 @@ int main(int argc, char **argv) {
 
     printf("%d %d: ", p, q);
 
-    if(id[p] == id[q]) {
+    int p_root = root(p);
+    int q_root = root(q);
+
+    if(p_root == q_root) {
       printf("\n");
       continue;
     }
 
-    int t = id[p];
-
-    for(int i = 0; i < N; i++){
-      if(id[i] == t) {
-        id[i] = id[q];
-      }
-    }
+    id[p_root] = q_root;
 
     printf("%d %d\n", p, q);
   }
