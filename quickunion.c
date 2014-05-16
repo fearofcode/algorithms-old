@@ -53,7 +53,13 @@ int main(int argc, char **argv) {
 
     id[p_root] = q_root;
 
-    printf("%d %d\n", p, q);
+    printf("p_root = %d, q_root = %d. ", p_root, q_root);
+
+    for(int i = 0; i < N; i++) {
+      printf("%d ", id[i]);
+    }
+
+    printf("\n");
   }
 
   free(line);
